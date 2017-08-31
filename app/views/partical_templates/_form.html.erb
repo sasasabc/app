@@ -1,0 +1,55 @@
+<div id='post_form'>
+  <h2>お気に入りのメシヤを共有しましょう</h2>
+  <%= form_with(model: post, local: true) do |form| %>
+    <% if post.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
+      
+        <ul>
+        <% post.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="actions">
+      <%= form.label :name %>
+      <%= form.text_field :name, id: :name %>
+    </div>
+
+    <div class="actions">
+      <%= form.label :url %>
+      <%= form.text_field :url, id: :url %>
+    </div>
+
+    <div class="actions">
+      <%= form.label :tel %>
+      <%= form.text_field :tel, id: :tel %>
+    </div>
+
+    <div class="actions">
+      <%= form.label :address %>
+      <%= form.text_field :address, id: :address %>
+    </div>
+
+    <div class="actions">
+      <%= form.label :comment %>
+      <%= form.text_area :comment, id: :comment %>
+    </div>
+
+    <div class="actions">
+      <%= form.label :image %>
+      <%= form.file_field :image, id: :image %>
+    </div>
+
+    <div class="actions">
+      <%= form.label :tag %>
+      <%= form.text_field :tag, id: :tag %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit %>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Meshiya</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+
+  </head>
+  <header>
+  	<% if user_signed_in? %>
+  		<p><b>Meshiya</b></p>
+  		<%= link_to 'home', posts_path %>
+  		<%= link_to 'mypage', user_path(current_user.id) %>
+      <span>search</span>
+      <%= link_to 'favorites', favorites_user_path(current_user.id) %>
+  		<%= link_to 'Logout', destroy_user_session_path, method: :delete %>
+  	<% else %>
+  		<p><b>Meshiya</b></p>
+  		<%= link_to 'home', home_path %>
+  		<%= link_to 'about', home_about_path %>
+  		<%= link_to 'login', new_user_session_path %>
+  		<%= link_to 'signup', new_user_registration_path %>
+  	<% end %>
+  </header>
+  <body>
+    <div id='wrapper'>
+
+      <%= yield %>
+    </div>
+  <footer>
+    <p>フッターフッターフッター</p>
+  </footer>                  
+  </body>
+</html>

@@ -1,0 +1,47 @@
+<div>
+	test::::<br>
+	<% @pingdatas.each do |p| %>
+		<%= p.name %>
+	<% end %>
+
+</div>
+<h2><%= @user.name %>のお気に入りpost</h2>
+<div id='aaa'>
+	<div id='left_column'>
+		<%= render 'partical_templates/user_propaty', user: @user %>
+		<%= render 'partical_templates/form', post: @post %>
+	</div>
+	<div id='map'>
+		<%= render 'partical_templates/map', post: @post %>
+	</div>
+</div>
+<div id='main_contents'>
+	<table>
+		<thead>
+			<tr>
+				<th colspan="3"></th>
+			</tr>
+		</thead>
+		<tbody>
+		<% @user.favorites.map { |f| f.post }.each do |post| %>
+		    <% if post.present? %>
+			<tr>
+				<td><%= post.user.name %></td>		
+				<td><%= image_tag post.user.user_image %></td>
+				<td><%= post.name %></td>		
+				<td><%= post.comment %></td>		
+				<td><%= post.tel %></td>		
+				<td><%= post.address %></td>		
+				<td><%= post.tag %></td>
+				<td><%= link_to 'Show', post_path(post.id) %></td>
+				<td><%= link_to 'お気に入り解除', post_favorites_path(post.id), method: :delete %></td>	
+			</tr>
+			<% end %>
+		<% end %>
+		</tbody>
+	</table>
+
+
+
+
+</div>

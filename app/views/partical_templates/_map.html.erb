@@ -1,0 +1,36 @@
+
+<div id='map'>
+  <p>google map</p>
+</div>
+	<script type="text/javascript">
+	  function initMap() {
+
+		    var map = new google.maps.Map(document.getElementById('map'), {
+		      zoom: 15,
+		      center: {lat: 35.658034, lng: 139.701636}
+		    });
+		    var transitLayer = new google.maps.TransitLayer();
+		    transitLayer.setMap(map);
+
+		<% @pingdatas.each do |p| %>
+	  	    var test = {lat: <%= p.latitude %>, lng: <%= p.longitude %>};	    
+		    var contentString = '<%= p.name %><br>住所：<%= p.address %>';
+		    var infowindow = new google.maps.InfoWindow({
+		      content: contentString
+		    });
+
+		    var marker = new google.maps.Marker({
+		      position:test,
+		      map: map,
+		      title: contentString
+		    });
+
+		    marker.addListener('click', function() {
+		      infowindow.open(map, marker);
+		    });
+		<% end %>
+	  }
+	</script>
+		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDd9IrZQ0-p4By-M5vh78ASi8g8FcOFlz8&callback=initMap"
+		type="text/javascript"></script>
+	</script>

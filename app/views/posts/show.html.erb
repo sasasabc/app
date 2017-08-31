@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<div id='left_column'>
+	<%= @post.user.name %><br>
+	<%= image_tag @post.user.user_image %><br>
+	<%= @post.name %><br>
+	<%= @post.comment %><br>
+	<%= @post.tel %><br>		
+	<%= @post.address %><br>		
+	<%= @post.tag %><br>
+	
+	<% if @post.user.id == current_user.id %>
+	<% else %>
+		<% if @post.favorited_by? current_user %>
+			<%= link_to '★', post_favorites_path(@post), method: :delete %>(<%= @post.favorites.count %>)
+		<% else %>
+			<%= link_to '☆', post_favorites_path(@post), method: :post %>(<%= @post.favorites.count %>)
+		<% end %>
+		<p>コメント系</p>
+	<% end %>
+	<p>テスト<br>
+		<%= @post.latitude %><br>
+		<%= @post.longitude %><br>
+	</p>
+</div>
+<div id='map'>
+	<%= render 'partical_templates/map2', post: @post %>
+</div>
+
+
